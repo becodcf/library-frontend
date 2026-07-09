@@ -21,7 +21,7 @@ function Navbar() {
       <div className="d-flex justify-content-between align-items-center w-100">
         <NavLink className="navbar-brand" to="/">
           <i className="bi bi-book-half me-2"></i>
-          Biblioteca
+          Biblioteca Oasis
         </NavLink>
 
         <button

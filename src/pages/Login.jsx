@@ -34,7 +34,7 @@ function Login() {
         <div className="card-body p-4">
           <h3 className="text-center mb-4">
             <i className="bi bi-book-half me-2"></i>
-            Biblioteca
+            Biblioteca Oasis
           </h3>
 
           {error && <div className="alert alert-danger py-2">{error}</div>}
