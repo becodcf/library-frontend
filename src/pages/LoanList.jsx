@@ -9,6 +9,13 @@ const statusLabels = {
   LATE: { text: "Atrasado", className: "bg-danger" }
 };
 
+// A API exige que a data de devolução seja estritamente futura (não aceita hoje)
+function getTomorrowISODate() {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  return tomorrow.toISOString().split("T")[0];
+}
+
 function LoanList() {
   const [loans, setLoans] = useState([]);
   const [books, setBooks] = useState([]);
@@ -56,6 +63,12 @@ function LoanList() {
 
     if (!bookId || !readerId || !dueDate) {
       setFormError("Selecione o livro, o leitor e a data de devolução.");
+      return;
+    }
+
+    const today = new Date().toISOString().split("T")[0];
+    if (dueDate <= today) {
+      setFormError("A data de devolução prevista deve ser futura.");
       return;
     }
 
@@ -139,6 +152,7 @@ function LoanList() {
                 type="date"
                 className="form-control"
                 value={dueDate}
+                min={getTomorrowISODate()}
                 onChange={(e) => setDueDate(e.target.value)}
               />
             </div>

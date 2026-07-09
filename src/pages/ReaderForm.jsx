@@ -45,7 +45,11 @@ function ReaderForm() {
     const newErrors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!form.name.trim()) newErrors.name = "O nome é obrigatório.";
+    if (!form.name.trim()) {
+      newErrors.name = "O nome é obrigatório.";
+    } else if (form.name.trim().length < 3) {
+      newErrors.name = "O nome deve ter no mínimo 3 caracteres.";
+    }
     if (!form.email.trim()) {
       newErrors.email = "O e-mail é obrigatório.";
     } else if (!emailRegex.test(form.email)) {

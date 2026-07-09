@@ -58,6 +58,8 @@ function BookForm() {
     if (!form.isbn.trim()) newErrors.isbn = "O ISBN é obrigatório.";
     if (form.year && Number.isNaN(Number(form.year))) {
       newErrors.year = "O ano deve ser um número.";
+    } else if (form.year && Number(form.year) > new Date().getFullYear()) {
+      newErrors.year = "O ano não pode ser maior que o ano atual.";
     }
 
     setErrors(newErrors);
