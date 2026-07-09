@@ -13,3 +13,22 @@ body {
 .navbar-brand {
   font-weight: 600;
 }
+
+.card {
+  border: none;
+  border-radius: 0.75rem;
+  transition: transform 0.15s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+.table thead {
+  background-color: #212529;
+  color: #fff;
+}
+
+.table thead th {
+  border: none;
+}

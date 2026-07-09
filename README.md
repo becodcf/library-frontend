@@ -1,16 +1,59 @@
-# React + Vite
+# Biblioteca - Front-end (Trabalho 2)
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+SPA em React que consome a API RESTful da biblioteca (Trabalho 1), permitindo login,
+gerenciamento de livros e leitores, e controle de empréstimos.
 
-Currently, two official plugins are available:
+## Tecnologias
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React + Vite
+- React-Router DOM (rotas e rotas protegidas)
+- Axios (consumo da API, com injeção automática do token JWT)
+- Bootstrap 5 + Bootstrap Icons (interface responsiva)
 
-## React Compiler
+## Funcionalidades
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Autenticação**: login e cadastro de usuário, com token JWT armazenado e enviado
+  automaticamente em todas as requisições autenticadas. Rotas internas são protegidas
+  e redirecionam para `/login` caso o usuário não esteja autenticado.
+- **Livros**: listagem em cards (com busca por título/autor), cadastro, edição, exclusão
+  e upload de capa (imagem).
+- **Leitores**: listagem em tabela, cadastro, edição e exclusão, com validação de e-mail.
+- **Empréstimos**: listagem de todos os empréstimos, registro de novo empréstimo
+  (selecionando livro disponível + leitor + data de devolução) e registro de devolução.
 
-## Expanding the Oxlint configuration
+## Como rodar
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+1. Instale as dependências:
+
+   ```bash
+   npm install
+   ```
+
+2. Configure a URL da API no arquivo `.env` (já vem configurado para `http://localhost:3333`,
+   que é a porta padrão da API do Trabalho 1):
+
+   ```
+   VITE_API_URL=http://localhost:3333
+   ```
+
+3. Certifique-se de que a API (back-end) esteja rodando.
+
+4. Rode o front-end em modo desenvolvimento:
+
+   ```bash
+   npm run dev
+   ```
+
+5. Acesse `http://localhost:5173`, crie uma conta e faça login para acessar o sistema.
+
+## Estrutura do projeto
+
+```
+src/
+├── components/   # Componentes reutilizáveis (Navbar, Layout, BookCard, PrivateRoute)
+├── contexts/      # AuthContext (gerenciamento de sessão)
+├── pages/         # Páginas/telas da aplicação
+├── services/      # Comunicação com a API (axios)
+├── App.jsx        # Definição das rotas
+└── main.jsx       # Ponto de entrada da aplicação
+```
