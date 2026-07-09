@@ -2,8 +2,21 @@ import { Link } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3333";
 
+// O back-end salva no campo coverImage apenas o nome do arquivo (ex: "123-livro.png"),
+// e serve os arquivos estaticamente a partir de /uploads. As imagens de capa ficam
+// especificamente em /uploads/covers.
+function getCoverUrl(coverImage) {
+  if (!coverImage) return null;
+
+  // Se algum dia o back-end passar a salvar o caminho completo, evitamos duplicar "uploads/covers"
+  const alreadyHasPath = coverImage.includes("/");
+  const path = alreadyHasPath ? coverImage : `uploads/covers/${coverImage}`;
+
+  return `${API_URL}/${path}`;
+}
+
 function BookCard({ book, onDelete }) {
-  const coverUrl = book.coverImage ? `${API_URL}/${book.coverImage}` : null;
+  const coverUrl = getCoverUrl(book.coverImage);
 
   return (
     <div className="col-sm-6 col-md-4 col-lg-3 mb-4">
